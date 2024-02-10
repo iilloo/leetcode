@@ -18,7 +18,7 @@ using namespace std;
  */
 
 // @lc code=start
-class MyStack {
+class MyStack { 
 public:
     queue<int> q;
     queue<int> sq;
