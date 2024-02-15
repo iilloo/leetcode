@@ -54,7 +54,7 @@ public:
             res[i] = mh.top().first;
             mh.pop();
         }
-        return res;
+        return res;  //返回res
     }
 };
 // @lc code=end
