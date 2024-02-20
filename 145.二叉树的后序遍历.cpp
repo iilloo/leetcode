@@ -49,6 +49,24 @@ public:
         res.push_back(root->val);
         return res;
     }
+    //递归法实现后续遍历
+    vector<int> postorderTraversal_1(TreeNode* root) {
+        stack<TreeNode*> ts;
+        ts.push(root);
+        while (!ts.empty()) {
+            TreeNode *tmp = ts.top();
+            ts.pop();
+            if (tmp == NULL) {
+                continue;
+            }
+            res.push_back(tmp->val);  
+            ts.push(tmp->left);
+            ts.push(tmp->right);
+        }
+        reverse(res.begin(), res.end());
+        return res;
+    }
+        
 };
 // @lc code=end
 

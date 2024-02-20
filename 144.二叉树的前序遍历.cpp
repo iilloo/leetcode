@@ -46,5 +46,23 @@ public:
         preorderTraversal(root->right);
         return res;
     }
+    //迭代法实现前序遍历
+    vector<int> preorderTraversal_1(TreeNode *root) {
+        stack<TreeNode*> ts;
+        ts.push(root);
+        while (!ts.empty()) {
+            TreeNode *tmp = ts.top();
+            ts.pop();
+            if (tmp == NULL) {
+                continue;
+            }
+            
+            res.push_back(tmp->val);
+            ts.push(tmp->right);
+            ts.push(tmp->left);
+            
+        }
+        return res;
+    }
 };
 // @lc code=end
