@@ -50,7 +50,29 @@ public:
         inorderTraversal(root->left);
         res.push_back(root->val);
         inorderTraversal(root->right);
-        
+
+        return res;
+    }
+
+    vector<int> inorderTraversal_1(TreeNode *root)
+    {
+        stack<TreeNode *> ts;
+        TreeNode *cp = root;
+        while (!ts.empty() || cp != NULL)
+        {
+            if (cp != NULL)
+            {
+                ts.push(cp);
+                cp = cp->left;
+            }
+            else
+            {
+                cp = ts.top();
+                ts.pop();
+                res.push_back(cp->val);
+                cp = cp->right;
+            }
+        }
         return res;
     }
 };
