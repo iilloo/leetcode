@@ -64,6 +64,7 @@ public:
             {
                 ts.push(cp);
                 cp = cp->left;
+                
             }
             else
             {
