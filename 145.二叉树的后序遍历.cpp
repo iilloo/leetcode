@@ -66,7 +66,31 @@ public:
         reverse(res.begin(), res.end());
         return res;
     }
-        
+    vector<int> postorderTraversal_2(TreeNode* root) {
+        stack<TreeNode*> ts;
+        if (root) {
+            ts.push(root);
+        }
+        while (!ts.empty()) {
+            TreeNode *tmp = ts.top();
+            ts.pop();
+            if (tmp != NULL) {
+                ts.push(tmp);
+                ts.push(NULL);
+                if (tmp->right) {
+                    ts.push(tmp->right);
+                }
+                if (tmp->left) {
+                    ts.push(tmp->left);
+                }
+ 
+            } else {
+                res.push_back(ts.top()->val);
+                ts.pop();
+            }
+        }
+        return res;
+    }
 };
 // @lc code=end
 

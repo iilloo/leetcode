@@ -53,7 +53,7 @@ public:
 
         return res;
     }
-
+    //迭代法
     vector<int> inorderTraversal_1(TreeNode *root)
     {
         stack<TreeNode *> ts;
@@ -72,6 +72,32 @@ public:
                 ts.pop();
                 res.push_back(cp->val);
                 cp = cp->right;
+            }
+        }
+        return res;
+    }
+    //统一迭代法,标记法
+    vector<int> inorderTraversal_2(TreeNode *root)
+    {
+        stack<TreeNode*> ts;
+        if (root) {
+            ts.push(root);
+        }
+        while (!ts.empty()) {
+            TreeNode* tmp = ts.top();
+            ts.pop();
+            if (tmp != NULL) {
+                if (tmp->right) {
+                    ts.push(tmp->right);
+                }
+                ts.push(tmp);
+                ts.push(NULL);
+                if(tmp->left) {
+                    ts.push(tmp->left);
+                }
+            } else {
+                res.push_back(ts.top()->val);
+                ts.pop();
             }
         }
         return res;

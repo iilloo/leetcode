@@ -29,7 +29,6 @@ struct TreeNode
 
 // Definition for a binary tree node.
 
-
 class Solution
 {
 public:
@@ -46,21 +45,56 @@ public:
         preorderTraversal(root->right);
         return res;
     }
-    //迭代法实现前序遍历
-    vector<int> preorderTraversal_1(TreeNode *root) {
-        stack<TreeNode*> ts;
+    // 迭代法实现前序遍历
+    vector<int> preorderTraversal_1(TreeNode *root)
+    {
+        stack<TreeNode *> ts;
         ts.push(root);
-        while (!ts.empty()) {
+        while (!ts.empty())
+        {
             TreeNode *tmp = ts.top();
             ts.pop();
-            if (tmp == NULL) {
+            if (tmp == NULL)
+            {
                 continue;
             }
-            
+
             res.push_back(tmp->val);
             ts.push(tmp->right);
             ts.push(tmp->left);
-            
+        }
+        return res;
+    }
+    // 统一迭代法
+    vector<int> preorderTraversal_2(TreeNode *root)
+    {
+        stack<TreeNode *> ts;
+        if (root)
+        {
+            ts.push(root);
+        }
+        while (!ts.empty())
+        {
+            TreeNode *tmp = ts.top();
+            ts.pop();
+            if (tmp != NULL)
+            {
+                if (tmp->right)
+                {
+                    ts.push(tmp->right);
+                }
+                if (tmp->left)
+                {
+                    ts.push(tmp->left);
+                }
+                ts.push(tmp);
+                ts.push(NULL);
+            }
+            else
+            {
+                res.push_back(ts.top()->val);
+                ts.pop();
+            }
         }
         return res;
     }
