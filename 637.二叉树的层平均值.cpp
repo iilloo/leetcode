@@ -38,11 +38,36 @@ class Solution
 public:
     vector<double> averageOfLevels(TreeNode *root)
     {
-        vector<int> res;
-        queue<TreeNode*> tq;
-        if (root) {
+        vector<double> res;
+        queue<TreeNode *> tq;
+        if (root)
+        {
             tq.push(root);
         }
+        while (!tq.empty())
+        {
+            double num = 0;
+            int csize = tq.size();
+            for (int i = 0; i < csize; ++i)
+            {
+                TreeNode *node = tq.front();
+                tq.pop();
+                num += node->val;
+                if (i == csize - 1)
+                {
+                    res.push_back(num / csize);
+                }
+                if (node->left)
+                {
+                    tq.push(node->left);
+                }
+                if (node->right)
+                {
+                    tq.push(node->right);
+                }
+            }
+        }
+        return res;
     }
 };
 // @lc code=end
