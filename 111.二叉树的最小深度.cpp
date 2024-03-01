@@ -92,5 +92,31 @@ public:
     {
         return getDepth(root);
     }
+
+    //递归法，前序求高度法
+    int getDepth(TreeNode* root, int depth, int result) {
+        if (root->left == NULL && root->right == NULL) {
+            result = depth >= result ? result : depth;
+            return result;
+        }
+        if (root->left) {
+            ++depth; 
+            result = getDepth(root->left, depth, result);
+            --depth;
+        }
+        if (root->right) {
+            ++depth; 
+            result = getDepth(root->right, depth, result);
+            --depth;
+        }
+        return result;
+    }
+    int minDepth_2(TreeNode *root)
+    {
+        if (!root) {
+            return 0;
+        }
+        return getDepth(root, 1, 0x7fffffff);
+    }
 };
 // @lc code=end
