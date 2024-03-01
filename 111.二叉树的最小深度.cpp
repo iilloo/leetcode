@@ -33,33 +33,64 @@ struct TreeNode
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    int minDepth(TreeNode* root) {
-        queue<TreeNode*> tq;
+    int minDepth(TreeNode *root)
+    {
+        queue<TreeNode *> tq;
         int depth = 0;
-        if (root) {
+        if (root)
+        {
             tq.push(root);
         }
-        while (!tq.empty()) {
+        while (!tq.empty())
+        {
             int csize = tq.size();
             ++depth;
-            for (int i = 0; i < csize; ++i) {
-                TreeNode* node = tq.front();
+            for (int i = 0; i < csize; ++i)
+            {
+                TreeNode *node = tq.front();
                 tq.pop();
-                if (node->left) {
+                if (node->left)
+                {
                     tq.push(node->left);
                 }
-                if (node->right) {
+                if (node->right)
+                {
                     tq.push(node->right);
                 }
-                if (node->left == NULL && node->right == NULL) {
+                if (node->left == NULL && node->right == NULL)
+                {
                     return depth;
                 }
             }
         }
         return depth;
     }
+
+    // 递归法，后序求高度法
+    int getDepth(TreeNode *root)
+    {
+        if (!root)
+        {
+            return 0;
+        }
+        int ldepth = getDepth(root->left);
+        int rdepth = getDepth(root->right);
+        if (root->left == NULL && root->right != NULL)
+        {
+            return 1 + rdepth;
+        }
+        if (root->right == NULL && root->left != NULL)
+        {
+            return 1 + ldepth;
+        }
+        return 1 + (ldepth >= rdepth ? rdepth : ldepth);
+    }
+    int minDepth_1(TreeNode *root)
+    {
+        return getDepth(root);
+    }
 };
 // @lc code=end
-
