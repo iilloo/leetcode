@@ -3,6 +3,8 @@
     "files.associations": {
         "iostream": "cpp",
         "map": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "algorithm": "cpp",
+        "iterator": "cpp"
     }
 }
