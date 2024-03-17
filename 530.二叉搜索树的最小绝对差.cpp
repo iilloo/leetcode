@@ -36,41 +36,52 @@ struct TreeNode
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    //递归法中序
-    TreeNode* pre = NULL;
-    void inorder(TreeNode* root, int &minSub) {
-        if (root == NULL) {
+    // 递归法中序
+    TreeNode *pre = NULL;
+    void inorder(TreeNode *root, int &minSub)
+    {
+        if (root == NULL)
+        {
             return;
         }
         inorder(root->left, minSub);
-        if (pre != NULL) {
+        if (pre != NULL)
+        {
             minSub = min(minSub, root->val - pre->val);
         }
         pre = root;
         inorder(root->right, minSub);
         return;
     }
-    int getMinimumDifference(TreeNode* root) {
+    int getMinimumDifference(TreeNode *root)
+    {
         int minSub = 0x7fffffff;
         inorder(root, minSub);
         return minSub;
     }
-    //迭代法中序
-    int getMinimumDifference_1(TreeNode* root) {
+    // 迭代法中序
+    int getMinimumDifference_1(TreeNode *root)
+    {
         int minSub = 0x7fffffff;
-        TreeNode* pre = NULL;
-        TreeNode* cur = root;
-        stack<TreeNode*> ts;
-        while (cur != NULL || (!ts.empty())) {
-            if (cur != NULL) {
+        TreeNode *pre = NULL;
+        TreeNode *cur = root;
+        stack<TreeNode *> ts;
+        while (cur != NULL || (!ts.empty()))
+        {
+            if (cur != NULL)
+            {
                 ts.push(cur);
                 cur = cur->left;
-            } else {
+            }
+            else
+            {
                 cur = ts.top();
                 ts.pop();
-                if (pre != NULL) {
+                if (pre != NULL)
+                {
                     minSub = min(minSub, cur->val - pre->val);
                 }
                 pre = cur;
@@ -82,4 +93,3 @@ public:
     }
 };
 // @lc code=end
-
