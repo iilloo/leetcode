@@ -53,7 +53,7 @@ public:
         return;
     }
     int getMinimumDifference(TreeNode* root) {
-        int minSub = 0x8fffffff;
+        int minSub = 0x7fffffff;
         inorder(root, minSub);
         return minSub;
     }
