@@ -82,6 +82,8 @@ public:
                 ts.pop();
                 if (pre != NULL)
                 {
+
+                    
                     minSub = min(minSub, cur->val - pre->val);
                 }
                 pre = cur;
