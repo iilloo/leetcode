@@ -5,6 +5,7 @@
         "map": "cpp",
         "functional": "cpp",
         "algorithm": "cpp",
-        "iterator": "cpp"
+        "iterator": "cpp",
+        "ostream": "cpp"
     }
 }
