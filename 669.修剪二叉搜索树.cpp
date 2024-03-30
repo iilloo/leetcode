@@ -56,7 +56,10 @@ public:
         return root;
     }
     //无返回值的递归法
-    //TreeNode* pre = NULL;
+    //以下的方法构造了一个最大虚拟头节点，但要考虑该头节点不在low-high的情况，
+    //所以有了label_1
+    //其实可以不用构造头节点，如果root超范围，则可以在左右子树找出第一个符合范围的节点当作新的root节点
+    //下面的迭代法就用了这种方法
     void travel(TreeNode* pre, TreeNode* root, int low, int high) {
         if (root == NULL) {
             return;
@@ -66,6 +69,7 @@ public:
             //pre = root->right;
             travel(pre, root->right, low, high);
         } else if (root->val > high) {
+            //label_1
             if (pre->val >= root->val) {
                 pre->left = root->left;
             } else {
@@ -89,6 +93,45 @@ public:
         VH->left = root;
         travel(VH, root, low, high);
         return VH->left;
+    }
+    //迭代法
+    TreeNode* trimBST_2(TreeNode* root, int low, int high) {
+        if (root == NULL) {
+            return NULL;
+        }
+        while (root != NULL && (root->val < low || root->val > high)) {
+            if (root->val < low) {
+                root = root->right;
+            } else if (root->val > high) {
+                root = root->left;
+            }
+        }
+        TreeNode* cur = root;
+        TreeNode* pre = NULL;
+        //修剪左子树
+        while (cur != NULL) {
+            if (cur->val < low) {
+                pre->left = cur->right;
+                cur = cur->right;
+            } else {
+                pre = cur;
+                cur = cur->left;
+            }
+        }
+        cur = root;
+        pre = NULL;
+        //修剪右子树
+        while (cur != NULL) {
+            if (cur->val > high) {
+                pre->right = cur->left;
+                cur = cur->left;
+            } else {
+                pre = cur;
+                cur = cur->right;
+            }
+        }
+
+        return root;
     }
 };
 // @lc code=end
